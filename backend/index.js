@@ -6,10 +6,11 @@ const router = require('./routes/index')
 
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 app.use("/api", router)
 
-const PORT = 5173 || process.env.PORT
+const PORT = 8080 || process.env.PORT
 
 connectDB().then(() => {
     app.listen(PORT, () => {
