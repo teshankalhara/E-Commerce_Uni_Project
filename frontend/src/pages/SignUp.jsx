@@ -4,7 +4,7 @@ import { FaEye } from 'react-icons/fa'
 import { FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom';
 import imageTobase64 from '../helpers/imageTobase64'
-import SummaryApi from '../apifolder'
+import SummaryApi from '../api'
 import { toast } from 'react-toastify';
 
 const SignUp = () => {
