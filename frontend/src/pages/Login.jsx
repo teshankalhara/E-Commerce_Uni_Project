@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import loginIcons from '../assets/signin.gif'
 import { FaEye } from 'react-icons/fa'
 import { FaEyeSlash } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import imageTobase64 from '../helpers/imageTobase64'
 import SummaryApi from '../api'
 import { toast } from 'react-toastify';
@@ -13,6 +13,8 @@ const Login = () => {
         email: "",
         password: ""
     })
+    
+    const navigate = useNavigate()
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -28,6 +30,7 @@ const Login = () => {
         e.preventDefault()
         const dataResponse = await fetch(SummaryApi.signIN.url, {
             method: SummaryApi.signIN.method,
+            credentials : 'include',
             headers: {
                 "content-type": "application/json"
             },
@@ -38,6 +41,7 @@ const Login = () => {
 
         if (dataApi.success) {
             toast.success(dataApi.message)
+            navigate('/')
         }
         
         if (dataApi.error) {
