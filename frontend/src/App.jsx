@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import SummaryApi from "./api";
+import Context from "./context";
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
       method:SummaryApi.current_user.method,
       credentials:"include"
     })
+    const dataApi=await dataResponse.json()
+    console.log("data-user:",dataResponse)
   }
   useEffect(()=>{
 
@@ -21,10 +24,14 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
-      <Header/>
-      <Outlet/>
-      <Footer/>
+      <Context.Provider value={{
+          fetchUserDetails//user details fetch
+      }}>
+        <ToastContainer />
+        <Header/>
+        <Outlet/>
+        <Footer/>
+      </Context.Provider>
     </>
   );
 }
