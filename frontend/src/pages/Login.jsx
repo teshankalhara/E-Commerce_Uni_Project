@@ -6,6 +6,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import imageTobase64 from '../helpers/imageTobase64'
 import SummaryApi from '../api'
 import { toast } from 'react-toastify';
+import { useContext } from 'react'
+import Context from '../context'
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -15,6 +17,7 @@ const Login = () => {
     })
     
     const navigate = useNavigate()
+    const { fetchUserDetails, fetchUserAddToCart } = useContext(Context)
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -42,13 +45,12 @@ const Login = () => {
         if (dataApi.success) {
             toast.success(dataApi.message)
             navigate('/')
+            fetchUserDetails()
         }
         
         if (dataApi.error) {
             toast.error(dataApi.message)
         }
-
-
     }
 
     console.log("data login", data)
